@@ -1,0 +1,105 @@
+﻿@*
+    Razor - синтаксис для впровадження серверного коду в HTML сторінку
+    Cимвол @ використовується для визначення початку фрагмента серверного коду в HTML розмітці
+    весь Razor код виконується на сервері, а на клієнт відправляється тільки HTML розмітка, отримана в результаті виконання Razor
+*@
+@model List<SimpleApp.Models.Product>
+
+@{
+    Layout = null; // не використовувати компонування.
+                   // Компонування необхідні створення сторінок по шаблону. Будуть розглянуті у наступних уроках
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>List</title>
+    <link href="~/styles.css" rel="stylesheet" />
+
+    <style>
+
+        H2 {
+            color: #fff;
+            text-align:center;
+            margin-bottom: 15px;
+        }
+
+
+        body {
+            background-color: #1a1a1a
+        }
+
+        .layer {
+            background: #404040; /* Цвет фона */
+            color: #fff;
+            padding: 10px; /* Поля вокруг текста */
+            padding-left: 25px;
+            align-content: center;
+            margin-bottom: 15px;
+            border-radius: 20px;
+            width:45%;
+            box-shadow: 0 0 10px rgba(0,0,0,0.5);
+
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+
+            .layer.p {
+                color: #fff
+            }
+
+        a {
+            color: red; /* Цвет ссылок */
+            text-decoration: none;
+        }
+
+            a:visited {
+                color: #cecece; /* Цвет посещенных ссылок */
+                text-decoration: none;
+            }
+
+            a:active {
+                color: #ffff00;
+                text-decoration: underline;
+            }
+
+
+        .lsub {
+            display: inline-block;
+            margin-right: 25px;
+        }
+/* 
+        .ind{
+            margin-left: auto;
+            margin-right: auto;
+        } */
+
+    </style>
+
+</head>
+<body>
+    <div class="ind">
+        <h2>Список продуктов</h2>
+
+        @foreach (var item in Model)
+        {
+            <div class="layer">
+                <div class="lsub"><p>№@item.Id</p></div>
+                <div class="lsub"><p>@item.Name</p></div>
+                <div class="lsub"><p><b><a href="/Products/Details/@item.Id">Детальніше...</a></b></p></div>
+            </div>
+
+        }
+
+    </div>
+
+
+
+
+</body>
+</html>
+
+
