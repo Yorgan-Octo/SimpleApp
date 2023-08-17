@@ -7,6 +7,7 @@
         public double Price { get; set; }
         public int Quantity { get; set; }
         public string Discription { get; set; }
+        public string Catecory { get; set; }
 
     }
 }

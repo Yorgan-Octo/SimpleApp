@@ -9,22 +9,25 @@ namespace SimpleApp.Controllers
     {
         private readonly ProductReader _reader;
 
-        // УВАГА.
-        // Кожен запит опрацьовує новий екземпляр контролера.
-        // Конструктор буде викликатися перед викликом методу List та методу Details
-        // Після обробки запиту, екземпляр контролера буде видалено з пам'яті
         public ProductsController()
         {
             _reader = new ProductReader();
         }
 
-        // Products/List
-        public IActionResult List()
+        public IActionResult List(string? id)
         {
-            List<Product> products = _reader.ReadFromFile();
-            // Повернення уявлення List та передача уявленню моделі у вигляді колекції products
-            // Отримати доступ до колекції у виставі можна буде через властивість представлення Model
-            return View(products);
+            if (id != null)
+            {
+
+                List<Product> products = _reader.ReadFromFile().Where(x => x.Catecory.ToLower() == id.ToLower()).ToList();
+                return View(products);
+
+            }
+            else
+            {
+                List<Product> products = _reader.ReadFromFile();
+                return View(products);
+            }
         }
 
         // Products/Details/1
@@ -35,13 +38,11 @@ namespace SimpleApp.Controllers
 
             if (product != null)
             {
-                // Повернення представлення з ім'ям Details та передача представлення екземпляра product
-                // Надання доступу до екземпляру можна отримати через властивість представлення Model
+
                 return View(product);
             }
             else
             {
-                // Повернення помилки 404
                 return NotFound();
             }
         }

@@ -23,6 +23,7 @@ namespace SimpleApp.Models
                 product.Price = Convert.ToDouble(items[2].Trim());
                 product.Quantity = Convert.ToInt32(items[3].Trim());
                 product.Discription = items[4].ToString().Trim();
+                product.Catecory = items[5].ToString().Trim();
 
                 result.Add(product);
             }
